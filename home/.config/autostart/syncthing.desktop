@@ -1,0 +1,13 @@
+[Desktop Entry]
+Categories=Network;
+Comment=Launch Syncthing daemon
+Exec=/home/deck/Programs/syncthing/syncthing
+GenericName=Syncthing
+Icon=syncthing
+Name=Syncthing
+StartupNotify=true
+Terminal=false
+TryExec=/home/deck/Programs/syncthing/syncthing
+Type=Application
+Version=1.0
+X-GNOME-Autostart-Delay=3

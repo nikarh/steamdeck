@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Comment=Setup
+Exec=konsole -e /home/deck/.bin/setup.sh
+Name=Setup
+StartupNotify=true
+Terminal=false
+Type=Application
+Icon=setup

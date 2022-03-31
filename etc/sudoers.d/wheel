@@ -1,0 +1,5 @@
+%wheel ALL=(ALL) ALL
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/systemctl
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/pacman-key
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/steamos-readonly

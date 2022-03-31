@@ -1,0 +1,16 @@
+export EDITOR="vim"
+
+trysource() {
+    if [ -f "$1" ]; then source "$1"; fi
+}
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias l="ls -lAh"
+alias df="df -h"
+
+trysource ~/.fzf/shell/completion.bash
+trysource ~/.fzf/shell/key-bindings.bash
+trysource ~/.bash-sensible/sensible.bash
+shopt -u cdable_vars
