@@ -1,5 +1,5 @@
 #!/usr/bin/bash -xe
-ROOT="$(cd "$(dirname "$(readlink ${BASH_SOURCE[0]})")" &> /dev/null && pwd)"
+ROOT="$(cd "$(dirname "$(readlink -f ${BASH_SOURCE[0]})")" &> /dev/null && pwd)"
 source "$ROOT/user_functions.sh"
 
 # Link configs
