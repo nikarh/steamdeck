@@ -25,10 +25,10 @@ fi
 
 # Download syncthing
 if [ ! -f ~/Programs/syncthing/syncthing ]; then
-    URL=$(curl -s https://api.github.com/repos/syncthing/syncthing/releases/latest \
+    URL="$(curl -s https://api.github.com/repos/syncthing/syncthing/releases/latest \
         | grep "https://.*syncthing-linux-amd64.*tar\.gz" \ 
         | cut -d : -f 2,3 \
-        | tr -d " ")
+        | tr -d " ")"
     file-get "$URL" ~/Programs/syncthing.tar.gz
     tar -zxvf ~/Programs/syncthing.tar.gz
     rm syncthing.tar.gz
