@@ -61,6 +61,7 @@ sudo steamos-readonly disable
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
 yay -S --noconfirm --needed --overwrite '*' \
-    fakeroot p7zip unrar insync insync-dolphin bat teamviewer
+    fakeroot p7zip unrar insync insync-dolphin bat teamviewer \
+    xdg-desktop-portal-gtk
 
 sudo steamos-readonly enable

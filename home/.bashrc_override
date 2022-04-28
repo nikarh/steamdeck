@@ -1,4 +1,5 @@
 export EDITOR="vim"
+export PATH=$PATH:~/.fzf/bin/
 
 trysource() {
     if [ -f "$1" ]; then source "$1"; fi
