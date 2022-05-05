@@ -15,3 +15,6 @@ trysource ~/.fzf/shell/completion.bash
 trysource ~/.fzf/shell/key-bindings.bash
 trysource ~/.bash-sensible/sensible.bash
 shopt -u cdable_vars
+
+
+WINE=~/.local/share/Steam/compatibilitytools.d/GE-Proton7-8/files/bin/wine
