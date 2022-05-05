@@ -14,3 +14,11 @@ function git-get {
         git -C "$2" pull -q;
     fi
 }
+
+function latest-release {
+    local URL="$(curl -s "https://api.github.com/repos/$1/releases/latest" \
+        | grep "$2" \
+        | cut -d : -f 2,3 \
+        | tr -d " ")"
+    file-get "$URL" "$3"
+}

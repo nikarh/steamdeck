@@ -1,0 +1,23 @@
+{
+	"exceptionsVersion": 0,
+	"titles": {
+		"The Legend of Zelda: Link's Awakening (2019)": {
+			"newTitle": "",
+			"searchTitle": "${gameid:5253316}",
+			"commandLineArguments": "",
+			"exclude": false
+		},
+		"Jetboard Joust": {
+			"newTitle": "",
+			"searchTitle": "${gameid:5250029}",
+			"commandLineArguments": "",
+			"exclude": false
+		},
+		"Chromium": {
+			"newTitle": "Chromium",
+			"searchTitle": "${gameid:37126}",
+			"commandLineArguments": "",
+			"exclude": false
+		}
+	}
+}

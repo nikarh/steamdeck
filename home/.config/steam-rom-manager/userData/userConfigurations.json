@@ -1,0 +1,222 @@
+[
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo Switch - Yuzu",
+        "steamCategory": "${Switch}",
+        "executableArgs": " run org.yuzu_emu.yuzu -f -g \"${filePath}\"",
+        "executableModifier": "\"${exePath}\"",
+        "romDirectory": "/home/deck/roms/switch",
+        "steamDirectory": "${steamdirglobal}",
+        "startInDirectory": "",
+        "imageProviders": [
+            "SteamGridDB"
+        ],
+        "titleModifier": "${fuzzyTitle}",
+        "onlineImageQueries": "${${fuzzyTitle}}",
+        "imagePool": "${fuzzyTitle}",
+        "defaultImage": "",
+        "defaultTallImage": "",
+        "defaultHeroImage": "",
+        "defaultLogoImage": "",
+        "defaultIcon": "",
+        "localImages": "",
+        "localTallImages": "",
+        "localHeroImages": "",
+        "localLogoImages": "",
+        "localIcons": "",
+        "disabled": false,
+        "advanced": false,
+        "executable": {
+            "path": "/usr/bin/flatpak",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "userAccounts": {
+            "specifiedAccounts": "",
+            "skipWithMissingDataDir": true,
+            "useCredentials": true
+        },
+        "parserInputs": {
+            "glob": "${title}@(.kip|.KIP|.nca|.NCA|.nro|.NRO|.nso|.NSO|.nsp|.NSP|.xci|.XCI)"
+        },
+        "titleFromVariable": {
+            "limitToGroups": "",
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "tryToMatchTitle": false
+        },
+        "fuzzyMatch": {
+            "use": true,
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "parserId": "164793997847531205",
+        "version": 5
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Heroic",
+        "steamCategory": "",
+        "executableArgs": "",
+        "executableModifier": "\"${exePath}\"",
+        "romDirectory": "/home/deck/Games/Heroic/.launcher/GameFiles",
+        "steamDirectory": "${steamdirglobal}",
+        "startInDirectory": "",
+        "imageProviders": [
+            "SteamGridDB"
+        ],
+        "titleModifier": "${fuzzyTitle}",
+        "onlineImageQueries": "${${fuzzyTitle}}",
+        "imagePool": "${fuzzyTitle}",
+        "defaultImage": "",
+        "defaultTallImage": "",
+        "defaultHeroImage": "",
+        "defaultLogoImage": "",
+        "defaultIcon": "",
+        "localImages": "",
+        "localTallImages": "",
+        "localHeroImages": "",
+        "localLogoImages": "",
+        "localIcons": "",
+        "disabled": false,
+        "advanced": true,
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": true,
+            "appendArgsToExecutable": true
+        },
+        "userAccounts": {
+            "specifiedAccounts": "",
+            "skipWithMissingDataDir": true,
+            "useCredentials": true
+        },
+        "parserInputs": {
+            "glob": "**/${title}_Heroic@(.sh)"
+        },
+        "titleFromVariable": {
+            "limitToGroups": "",
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "tryToMatchTitle": false
+        },
+        "fuzzyMatch": {
+            "use": true,
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "parserId": "164795179597621087",
+        "version": 5
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Native",
+        "steamCategory": "${Games}",
+        "executableArgs": "",
+        "executableModifier": "\"${exePath}\"",
+        "romDirectory": "/home/deck/Games/",
+        "steamDirectory": "${steamdirglobal}",
+        "startInDirectory": "",
+        "imageProviders": [
+            "SteamGridDB"
+        ],
+        "titleModifier": "${fuzzyTitle}",
+        "onlineImageQueries": "${${fuzzyTitle}}",
+        "imagePool": "${fuzzyTitle}",
+        "defaultImage": "",
+        "defaultTallImage": "",
+        "defaultHeroImage": "",
+        "defaultLogoImage": "",
+        "defaultIcon": "",
+        "localImages": "/home/deck/Games/.images/${title}/header.jpg",
+        "localTallImages": "/home/deck/Games/.images/${title}/library_600x900.jpg",
+        "localHeroImages": "/home/deck/Games/.images/${title}/library_hero.jpg",
+        "localLogoImages": "/home/deck/Games/.images/${title}/logo.png",
+        "localIcons": "/home/deck/Games/.images/${title}/icon.ico",
+        "disabled": false,
+        "advanced": true,
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": true,
+            "appendArgsToExecutable": true
+        },
+        "userAccounts": {
+            "specifiedAccounts": "",
+            "skipWithMissingDataDir": true,
+            "useCredentials": true
+        },
+        "parserInputs": {
+            "glob": "**/${title}_run@(.sh)"
+        },
+        "titleFromVariable": {
+            "limitToGroups": "",
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "tryToMatchTitle": false
+        },
+        "fuzzyMatch": {
+            "use": true,
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "parserId": "164882672332884104",
+        "version": 5
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Tools",
+        "steamCategory": "${Tools}",
+        "executableArgs": "",
+        "executableModifier": "\"${exePath}\"",
+        "romDirectory": "/home/deck/.bin/tools",
+        "steamDirectory": "${steamdirglobal}",
+        "startInDirectory": "",
+        "imageProviders": [
+            "SteamGridDB"
+        ],
+        "titleModifier": "${fuzzyTitle}",
+        "onlineImageQueries": "${${fuzzyTitle}}",
+        "imagePool": "${fuzzyTitle}",
+        "defaultImage": "",
+        "defaultTallImage": "",
+        "defaultHeroImage": "",
+        "defaultLogoImage": "",
+        "defaultIcon": "",
+        "localImages": "/home/deck/Games/.images/${title}/header.jpg",
+        "localTallImages": "/home/deck/Games/.images/${title}/library_600x900.jpg",
+        "localHeroImages": "/home/deck/Games/.images/${title}/library_hero.jpg",
+        "localLogoImages": "/home/deck/Games/.images/${title}/logo.png",
+        "localIcons": "/home/deck/Games/.images/${title}/icon.ico",
+        "disabled": false,
+        "advanced": true,
+        "executable": {
+            "path": "",
+            "shortcutPassthrough": true,
+            "appendArgsToExecutable": true
+        },
+        "userAccounts": {
+            "specifiedAccounts": "",
+            "skipWithMissingDataDir": true,
+            "useCredentials": true
+        },
+        "parserInputs": {
+            "glob": "**/${title}@(.sh)"
+        },
+        "titleFromVariable": {
+            "limitToGroups": "",
+            "caseInsensitiveVariables": false,
+            "skipFileIfVariableWasNotFound": false,
+            "tryToMatchTitle": false
+        },
+        "fuzzyMatch": {
+            "use": true,
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "parserId": "165175551262813248",
+        "version": 5
+    }
+]

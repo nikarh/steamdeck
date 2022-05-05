@@ -1,0 +1,30 @@
+{
+	"fuzzyMatcher": {
+		"timestamps": {
+			"check": 1651755427282,
+			"download": 1651755427282
+		},
+		"verbose": false,
+		"filterProviders": true
+	},
+	"environmentVariables": {
+		"steamDirectory": "/home/deck/.steam/steam",
+		"retroarchPath": "/home/deck/.steam/steam/steamapps/common/RetroArch/retroarch",
+		"raCoresDirectory": "/home/deck/.steam/steam/steamapps/common/RetroArch/cores",
+		"localImagesDirectory": "/home/deck/Games/.images"
+	},
+	"previewSettings": {
+		"retrieveCurrentSteamImages": true,
+		"deleteDisabledShortcuts": false,
+		"imageZoomPercentage": 30,
+		"preload": false
+	},
+	"enabledProviders": [
+		"SteamGridDB"
+	],
+	"language": "English",
+	"offlineMode": false,
+	"navigationWidth": 0,
+	"clearLogOnTest": false,
+	"version": 2
+}

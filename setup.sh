@@ -25,11 +25,8 @@ fi
 
 # Download syncthing
 if [ ! -f ~/Programs/syncthing/syncthing ]; then
-    URL="$(curl -s https://api.github.com/repos/syncthing/syncthing/releases/latest \
-        | grep "https://.*syncthing-linux-amd64.*tar\.gz" \
-        | cut -d : -f 2,3 \
-        | tr -d " ")"
-    file-get "$URL" ~/Programs/syncthing.tar.gz
+    latest-release syncthing/syncthing "https://.*syncthing-linux-amd64.*tar\.gz" \
+        ~/Programs/syncthing.tar.gz
     tar -zxvf ~/Programs/syncthing.tar.gz
     rm syncthing.tar.gz
 fi
@@ -37,22 +34,24 @@ fi
 # Install flatpaks
 flatpak install --noninteractive --or-update flathub \
     `# Apps` \
+    com.github.Eloston.UngoogledChromium \
     org.keepassxc.KeePassXC \
     org.qbittorrent.qBittorrent \
     org.telegram.desktop \
     com.visualstudio.code \
     com.discordapp.Discord \
     com.github.iwalton3.jellyfin-media-player \
-    com.github.Eloston.UngoogledChromium \
-    com.github.tchx84.Flatseal \
+    com.steamgriddb.steam-rom-manager \
     com.heroicgameslauncher.hgl \
+    com.github.tchx84.Flatseal \
     `# Emulators` \
     app.xemu.xemu \
     org.DolphinEmu.dolphin-emu \
     org.citra_emu.citra \
     org.desmume.DeSmuME \
-    org.yuzu_emu.yuzu \
+    org.yuzu_emu.yuzu
 
+flatpak override --user com.github.Eloston.UngoogledChromium --socket=session-bus
 
 # NOPASSWD for all of the bellow commands plus systemctl for teamviewer
 if ! sudo -n /usr/bin/pacman -V > /dev/null 2>&1; then
