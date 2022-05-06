@@ -110,12 +110,12 @@
         "version": 5
     },
     {
-        "parserType": "Glob",
-        "configTitle": "Native",
-        "steamCategory": "${Games}",
+        "parserType": "Glob-regex",
+        "configTitle": "Shell runners",
+        "steamCategory": "${${/(?:.*\\/)*/([^\\/\\.]+)\\/[^\\/]*\\.sh/|${exePath}}}",
         "executableArgs": "",
         "executableModifier": "\"${exePath}\"",
-        "romDirectory": "/home/deck/Games/",
+        "romDirectory": "/home/deck/Games/.bin",
         "steamDirectory": "${steamdirglobal}",
         "startInDirectory": "",
         "imageProviders": [
@@ -142,15 +142,15 @@
             "appendArgsToExecutable": true
         },
         "userAccounts": {
-            "specifiedAccounts": "",
+            "specifiedAccounts": null,
             "skipWithMissingDataDir": true,
             "useCredentials": true
         },
         "parserInputs": {
-            "glob": "**/${title}_run@(.sh)"
+            "glob-regex": "**/${/^([^\\.].*).sh$/}"
         },
         "titleFromVariable": {
-            "limitToGroups": "",
+            "limitToGroups": "$1",
             "caseInsensitiveVariables": false,
             "skipFileIfVariableWasNotFound": false,
             "tryToMatchTitle": false
