@@ -4,7 +4,7 @@
 GAMEDIR=~/Games
 STEAM=~/.local/share/Steam
 PROTON="$STEAM/${PROTON:-"compatibilitytools.d/GE-Proton7-17"}"
-WINE="$PROTON/${WINE_DIR:-files/bin}/wine"
+WINE="${WINE_PATH:-"$PROTON/${WINE_DIR:-files/bin}/wine"}"
 
 export STEAM_COMPAT_CLIENT_INSTALL_PATH=~/.local/share/Steam/
 export STEAM_COMPAT_DATA_PATH="$GAMEDIR/.wine/$PREFIX_ID"
@@ -28,8 +28,26 @@ proton)
     "$PROTON/proton" run "$GAMEDIR/$2" "${@:3}"
     ;;
 wine)
-    WINEPREFIX=${WINEPREFIX:-"$STEAM_COMPAT_DATA_PATH/pfx"} \
-        "$WINE" "$GAMEDIR/$2" "${@:3}"
+    export WINEPREFIX="${WINEPREFIX:-"$STEAM_COMPAT_DATA_PATH/pfx"}"
+
+    if [ -n "$VIRTUAL_DESKTOP" ]; then
+        RES=""
+        if [ "$VIRTUAL_DESKTOP" = 1 ]; then
+            RES=$(xdpyinfo | awk '/dimensions/ {print $2}')
+        fi
+        cat > /tmp/res.reg << EOF
+REGEDIT4
+[HKEY_CURRENT_USER\Software\Wine\Explorer]
+"Desktop"="Default"
+[HKEY_CURRENT_USER\Software\Wine\Explorer\Desktops]
+"Default"="${RES}"
+[HKEY_CURRENT_USER\Software\Wine\X11 Driver]
+"GrabFullscreen"="N"
+EOF
+        "$WINE" regedit /tmp/res.reg
+        rm /tmp/res.reg
+    fi
+    "$WINE" "$GAMEDIR/$2" "${@:3}"
     ;;
 *)
     echo "Unknown runtime"

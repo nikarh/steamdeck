@@ -50,7 +50,20 @@
             "removeBrackets": true
         },
         "parserId": "164793997847531205",
-        "version": 6
+        "version": 10,
+        "imageProviderAPIs": {
+            "SteamGridDB": {
+                "nsfw": false,
+                "humor": false,
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": []
+            }
+        }
     },
     {
         "parserType": "Glob",
@@ -103,7 +116,20 @@
             "removeBrackets": true
         },
         "parserId": "164795179597621087",
-        "version": 6
+        "version": 10,
+        "imageProviderAPIs": {
+            "SteamGridDB": {
+                "nsfw": false,
+                "humor": false,
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": []
+            }
+        }
     },
     {
         "parserType": "Glob-regex",
@@ -155,7 +181,20 @@
             "removeBrackets": true
         },
         "parserId": "164882672332884104",
-        "version": 6
+        "version": 10,
+        "imageProviderAPIs": {
+            "SteamGridDB": {
+                "nsfw": false,
+                "humor": false,
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": []
+            }
+        }
     },
     {
         "parserType": "Glob",
@@ -208,6 +247,85 @@
             "removeBrackets": true
         },
         "parserId": "165175551262813248",
-        "version": 6
+        "version": 10,
+        "imageProviderAPIs": {
+            "SteamGridDB": {
+                "nsfw": false,
+                "humor": false,
+                "imageMotionTypes": [
+                    "static"
+                ],
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": []
+            }
+        }
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo WiiU - Cemu",
+        "steamCategory": "${Wii U}",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "/home/deck/roms/wiiu",
+        "executableArgs": "-f -g \"Y:${/^\\/home\\/deck\\/roms(.*)/|${filePath}}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "imageProviders": [
+            "SteamGridDB"
+        ],
+        "onlineImageQueries": "${${fuzzyTitle}}",
+        "imagePool": "${fuzzyTitle}",
+        "defaultImage": "",
+        "defaultTallImage": "",
+        "defaultHeroImage": "",
+        "defaultLogoImage": "",
+        "defaultIcon": "",
+        "localImages": "",
+        "localTallImages": "",
+        "localHeroImages": "",
+        "localLogoImages": "",
+        "localIcons": "${dir}/../*${/\\[.*?\\]/g|${title}|}*/meta/iconTex.tga",
+        "userAccounts": {
+            "specifiedAccounts": "",
+            "skipWithMissingDataDir": true,
+            "useCredentials": true
+        },
+        "executable": {
+            "path": "/home/deck/Games/.bin/Emulators/Cemu.sh",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "${title}/*/*@(.rpx|.RPX)"
+        },
+        "titleFromVariable": {
+            "limitToGroups": "${WIIU}",
+            "caseInsensitiveVariables": true,
+            "skipFileIfVariableWasNotFound": false,
+            "tryToMatchTitle": true
+        },
+        "fuzzyMatch": {
+            "use": null,
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "imageProviderAPIs": {
+            "SteamGridDB": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ]
+            }
+        },
+        "parserId": "165271857442772476",
+        "version": 10
     }
 ]
