@@ -25,7 +25,6 @@
         "localLogoImages": "",
         "localIcons": "",
         "disabled": false,
-        "advanced": false,
         "executable": {
             "path": "/usr/bin/flatpak",
             "shortcutPassthrough": false,
@@ -46,13 +45,12 @@
             "tryToMatchTitle": false
         },
         "fuzzyMatch": {
-            "use": true,
             "replaceDiacritics": true,
             "removeCharacters": true,
             "removeBrackets": true
         },
         "parserId": "164793997847531205",
-        "version": 5
+        "version": 6
     },
     {
         "parserType": "Glob",
@@ -80,7 +78,6 @@
         "localLogoImages": "",
         "localIcons": "",
         "disabled": false,
-        "advanced": true,
         "executable": {
             "path": "",
             "shortcutPassthrough": true,
@@ -101,27 +98,26 @@
             "tryToMatchTitle": false
         },
         "fuzzyMatch": {
-            "use": true,
             "replaceDiacritics": true,
             "removeCharacters": true,
             "removeBrackets": true
         },
         "parserId": "164795179597621087",
-        "version": 5
+        "version": 6
     },
     {
         "parserType": "Glob-regex",
         "configTitle": "Shell runners",
         "steamCategory": "${${/(?:.*\\/)*/([^\\/\\.]+)\\/[^\\/]*\\.sh/|${exePath}}}",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "/home/deck/Games/.bin",
         "executableArgs": "",
         "executableModifier": "\"${exePath}\"",
-        "romDirectory": "/home/deck/Games/.bin",
-        "steamDirectory": "${steamdirglobal}",
         "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
         "imageProviders": [
             "SteamGridDB"
         ],
-        "titleModifier": "${fuzzyTitle}",
         "onlineImageQueries": "${${fuzzyTitle}}",
         "imagePool": "${fuzzyTitle}",
         "defaultImage": "",
@@ -134,17 +130,15 @@
         "localHeroImages": "/home/deck/Games/.images/${title}/library_hero.jpg",
         "localLogoImages": "/home/deck/Games/.images/${title}/logo.png",
         "localIcons": "/home/deck/Games/.images/${title}/icon.ico",
-        "disabled": false,
-        "advanced": true,
+        "userAccounts": {
+            "specifiedAccounts": "",
+            "skipWithMissingDataDir": true,
+            "useCredentials": true
+        },
         "executable": {
             "path": "",
             "shortcutPassthrough": true,
             "appendArgsToExecutable": true
-        },
-        "userAccounts": {
-            "specifiedAccounts": null,
-            "skipWithMissingDataDir": true,
-            "useCredentials": true
         },
         "parserInputs": {
             "glob-regex": "**/${/^([^\\.].*).sh$/}"
@@ -156,13 +150,12 @@
             "tryToMatchTitle": false
         },
         "fuzzyMatch": {
-            "use": true,
             "replaceDiacritics": true,
             "removeCharacters": true,
             "removeBrackets": true
         },
         "parserId": "164882672332884104",
-        "version": 5
+        "version": 6
     },
     {
         "parserType": "Glob",
@@ -190,7 +183,6 @@
         "localLogoImages": "/home/deck/Games/.images/${title}/logo.png",
         "localIcons": "/home/deck/Games/.images/${title}/icon.ico",
         "disabled": false,
-        "advanced": true,
         "executable": {
             "path": "",
             "shortcutPassthrough": true,
@@ -211,12 +203,11 @@
             "tryToMatchTitle": false
         },
         "fuzzyMatch": {
-            "use": true,
             "replaceDiacritics": true,
             "removeCharacters": true,
             "removeBrackets": true
         },
         "parserId": "165175551262813248",
-        "version": 5
+        "version": 6
     }
 ]

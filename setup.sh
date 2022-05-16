@@ -17,18 +17,20 @@ git-get https://github.com/junegunn/fzf.git \
 # Init vim
 vim +PlugClean! +PlugUpdate +qa
 
-# Add custom bashrc
-if ! grep -q "source ~/.bashrc_override" ~/.bashrc; then
-    echo "source ~/.bashrc_override" >> ~/.bashrc
-    source ~/.bashrc_override
-fi
-
 # Download syncthing
 if [ ! -f ~/Programs/syncthing/syncthing ]; then
-    latest-release syncthing/syncthing "https://.*syncthing-linux-amd64.*tar\.gz" \
+    latest-release syncthing/syncthing "syncthing-linux-amd64.*tar\.gz$" \
         ~/Programs/syncthing.tar.gz
     tar -zxvf ~/Programs/syncthing.tar.gz
     rm syncthing.tar.gz
+fi
+
+# Download starship
+if [ ! -f ~/.bin/starship ]; then
+    latest-release starship/starship "starship-x86_64-unknown-linux-gnu\.tar\.gz$" \
+        /tmp/starship.tar.gz
+    tar -zxvf /tmp/starship.tar.gz -C ~/.bin/
+    rm /tmp/starship.tar.gz
 fi
 
 # Install flatpaks
@@ -63,6 +65,7 @@ sudo steamos-readonly disable
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
 yay -Sy --noconfirm --needed --overwrite '*' \
+    lib32-freetype2 \
     fakeroot p7zip unrar insync insync-dolphin bat teamviewer \
     xdg-desktop-portal-gtk
 

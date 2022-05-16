@@ -17,8 +17,8 @@ function git-get {
 
 function latest-release {
     local URL="$(curl -s "https://api.github.com/repos/$1/releases/latest" \
+        | jq -r '.assets[].browser_download_url' \
         | grep "$2" \
-        | cut -d : -f 2,3 \
-        | tr -d " ")"
+        | head -n 1)"
     file-get "$URL" "$3"
 }

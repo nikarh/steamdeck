@@ -1,9 +1,9 @@
 #!/usr/bin/bash -xe
 # shellcheck disable=SC2155
 
-GAMEDIR="$(dirname "$($0)")/.."
+GAMEDIR=~/Games
 STEAM=~/.local/share/Steam
-PROTON="$STEAM/${PROTON:-"compatibilitytools.d/GE-Proton7-8"}"
+PROTON="$STEAM/${PROTON:-"compatibilitytools.d/GE-Proton7-17"}"
 WINE="$PROTON/${WINE_DIR:-files/bin}/wine"
 
 export STEAM_COMPAT_CLIENT_INSTALL_PATH=~/.local/share/Steam/
