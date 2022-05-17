@@ -298,7 +298,7 @@
             "appendArgsToExecutable": true
         },
         "parserInputs": {
-            "glob": "${title}/*/*@(.rpx|.RPX)"
+            "glob": "${title}/*/*@(.rpx|.RPX|.wux)"
         },
         "titleFromVariable": {
             "limitToGroups": "${WIIU}",
@@ -326,6 +326,72 @@
             }
         },
         "parserId": "165271857442772476",
+        "version": 10
+    },
+    {
+        "parserType": "Glob",
+        "configTitle": "Nintendo WiiU - Cemu",
+        "steamCategory": "${Wii U}",
+        "steamDirectory": "${steamdirglobal}",
+        "romDirectory": "/home/deck/roms/wiiu",
+        "executableArgs": "-f -g \"Y:${/^\\/home\\/deck\\/roms(.*)/|${filePath}}\"",
+        "executableModifier": "\"${exePath}\"",
+        "startInDirectory": "",
+        "titleModifier": "${fuzzyTitle}",
+        "imageProviders": [
+            "SteamGridDB"
+        ],
+        "onlineImageQueries": "${${fuzzyTitle}}",
+        "imagePool": "${fuzzyTitle}",
+        "defaultImage": "",
+        "defaultTallImage": "",
+        "defaultHeroImage": "",
+        "defaultLogoImage": "",
+        "defaultIcon": "",
+        "localImages": "",
+        "localTallImages": "",
+        "localHeroImages": "",
+        "localLogoImages": "",
+        "localIcons": "${dir}/../*${/\\[.*?\\]/g|${title}|}*/meta/iconTex.tga",
+        "userAccounts": {
+            "specifiedAccounts": "",
+            "skipWithMissingDataDir": true,
+            "useCredentials": true
+        },
+        "executable": {
+            "path": "/home/deck/Games/.bin/Emulators/Cemu.sh",
+            "shortcutPassthrough": false,
+            "appendArgsToExecutable": true
+        },
+        "parserInputs": {
+            "glob": "${title}@(.rpx|.RPX|.wux)"
+        },
+        "titleFromVariable": {
+            "limitToGroups": "${WIIU}",
+            "caseInsensitiveVariables": true,
+            "skipFileIfVariableWasNotFound": false,
+            "tryToMatchTitle": true
+        },
+        "fuzzyMatch": {
+            "use": null,
+            "replaceDiacritics": true,
+            "removeCharacters": true,
+            "removeBrackets": true
+        },
+        "imageProviderAPIs": {
+            "SteamGridDB": {
+                "nsfw": false,
+                "humor": false,
+                "styles": [],
+                "stylesHero": [],
+                "stylesLogo": [],
+                "stylesIcon": [],
+                "imageMotionTypes": [
+                    "static"
+                ]
+            }
+        },
+        "parserId": "165278867037422604",
         "version": 10
     }
 ]

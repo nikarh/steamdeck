@@ -16,7 +16,8 @@ trysource ~/.fzf/shell/key-bindings.bash
 trysource ~/.bash-sensible/sensible.bash
 shopt -u cdable_vars
 
-export WINE=~/.local/share/Steam/compatibilitytools.d/GE-Proton7-17/files/bin/wine
+export WINE=/home/deck/.var/app/net.lutris.Lutris/data/lutris/runners/wine/lutris-GE-Proton7-11-x86_64/bin/wine
+export WINETRICKS=/home/deck/.var/app/net.lutris.Lutris/data/lutris/runtime/winetricks/winetricks
 
 if [ -f ~/.bin/starship ]; then 
     eval "$(starship init bash)"

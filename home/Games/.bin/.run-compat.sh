@@ -22,7 +22,7 @@ if [ -z "$NO_INIT" ] && [ -z "$WINEPREFIX" ]; then
 fi
 
 echo Run game
-cd "$(dirname "$GAMEDIR/$1")" || exit
+cd "$(dirname "$GAMEDIR/$2")" || exit
 case "$1" in
 proton)
     "$PROTON/proton" run "$GAMEDIR/$2" "${@:3}"

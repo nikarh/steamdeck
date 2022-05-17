@@ -67,6 +67,6 @@ sudo pacman-key --populate archlinux
 yay -Sy --noconfirm --needed --overwrite '*' \
     lib32-freetype2 \
     fakeroot p7zip unrar insync insync-dolphin bat teamviewer \
-    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gtk podman
 
 sudo steamos-readonly enable
