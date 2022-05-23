@@ -307,7 +307,6 @@
             "tryToMatchTitle": true
         },
         "fuzzyMatch": {
-            "use": null,
             "replaceDiacritics": true,
             "removeCharacters": true,
             "removeBrackets": true
@@ -373,7 +372,6 @@
             "tryToMatchTitle": true
         },
         "fuzzyMatch": {
-            "use": null,
             "replaceDiacritics": true,
             "removeCharacters": true,
             "removeBrackets": true

@@ -1,0 +1,13 @@
+[Unit]
+Description=Syncthing
+After=sockets.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=%h/Programs/syncthing/syncthing
+
+[Install]
+WantedBy=default.target

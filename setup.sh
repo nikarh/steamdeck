@@ -15,15 +15,35 @@ git-get https://github.com/junegunn/fzf.git \
     ~/.fzf
 
 # Init vim
-vim +PlugClean! +PlugUpdate +qa
+vim +PlugClean! +PlugUpdate +qa > /dev/null 2>&1
 
-# Download syncthing
+# Download and enable syncthing
 if [ ! -f ~/Programs/syncthing/syncthing ]; then
     latest-release syncthing/syncthing "syncthing-linux-amd64.*tar\.gz$" \
         ~/Programs/syncthing.tar.gz
     tar -zxvf ~/Programs/syncthing.tar.gz
     rm syncthing.tar.gz
 fi
+systemctl enable --now --user syncthing
+
+# Gyro support for yuzu and cemu
+latest-release kmicki/SteamDeckGyroDSU "SteamDeckGyroDSUSetup\.zip$" \
+        ~/Programs/sdgyrodsu.zip
+unzip -o ~/Programs/sdgyrodsu.zip -d ~/Programs >/dev/null;
+rm -f ~/Programs/sdgyrodsu.zip
+sed -i 's/ExecStart=.*/ExecStart=%h\/.bin\/sdgyrodsu/g' ~/Programs/SteamDeckGyroDSUSetup/sdgyrodsu.service
+sed -i 's/HOME\/sdgyrodsu/HOME\/.bin/g' ~/Programs/SteamDeckGyroDSUSetup/install.sh
+
+if groups | grep -q usbaccess; then
+    mkdir -p ~/.config/systemd/user/
+    mv ~/Programs/SteamDeckGyroDSUSetup/sdgyrodsu.service ~/.config/systemd/user/
+    mv ~/Programs/SteamDeckGyroDSUSetup/sdgyrodsu ~/.bin/
+else
+    (cd ~/Programs/SteamDeckGyroDSUSetup/; ./install.sh)
+fi
+
+rm -rf ~/Programs/SteamDeckGyroDSUSetup
+systemctl enable --now --user sdgyrodsu
 
 # Download starship
 if [ ! -f ~/.bin/starship ]; then
