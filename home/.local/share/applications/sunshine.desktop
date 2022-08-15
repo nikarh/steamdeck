@@ -1,0 +1,10 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Comment[en_US]=Remote control solution.
+Comment=Remote control solution.
+Exec=flatpak run dev.lizardbyte.sunshine
+Name=Sunshine
+StartupNotify=true
+Terminal=true
+Type=Application
+Icon=/home/deck/.local/share/icons/logo-sunshine-45.png

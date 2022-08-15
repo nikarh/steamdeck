@@ -53,6 +53,13 @@ if [ ! -f ~/.bin/starship ]; then
     rm /tmp/starship.tar.gz
 fi
 
+# Sunshine for streaming, not in flathub yet
+latest-release LizardByte/Sunshine "sunshine\.flatpak$" \
+        /tmp/sunshine.flatpak
+flatpak install --user --noninteractive --or-update \
+    /tmp/sunshine.flatpak || true
+rm /tmp/sunshine.flatpak
+
 # Install flatpaks
 flatpak install --noninteractive --or-update flathub \
     `# Apps` \
@@ -86,7 +93,7 @@ sudo pacman-key --init
 sudo pacman-key --populate archlinux
 yay -Sy --noconfirm --needed --overwrite '*' \
     lib32-freetype2 \
-    fakeroot p7zip unrar insync insync-dolphin bat teamviewer \
+    fakeroot p7zip unrar insync insync-dolphin bat \
     xdg-desktop-portal-gtk podman
 
 sudo steamos-readonly enable
