@@ -22,7 +22,7 @@ if [ ! -f ~/Programs/syncthing/syncthing ]; then
     latest-release syncthing/syncthing "syncthing-linux-amd64.*tar\.gz$" \
         ~/Programs/syncthing.tar.gz
     tar -zxvf ~/Programs/syncthing.tar.gz
-    rm syncthing.tar.gz
+    rm ~/Programs/syncthing.tar.gz
 fi
 systemctl enable --now --user syncthing
 
@@ -54,7 +54,7 @@ if [ ! -f ~/.bin/starship ]; then
 fi
 
 # Sunshine for streaming, not in flathub yet
-latest-release LizardByte/Sunshine "sunshine\.flatpak$" \
+latest-release LizardByte/Sunshine "sunshine_x86_64.flatpak$" \
         /tmp/sunshine.flatpak
 flatpak install --user --noninteractive --or-update \
     /tmp/sunshine.flatpak || true
@@ -87,13 +87,23 @@ if ! sudo -n /usr/bin/pacman -V > /dev/null 2>&1; then
     cat "$ROOT/etc/sudoers.d/wheel" | sudo tee /etc/sudoers.d/wheel
 fi
 
+# Install yay for insync
+if [ ! -f ~/.bin/yay ]; then
+    latest-release Jguer/yay "yay_.*_x86_64.tar.gz$" \
+        ~/.bin/yay.tar.gz
+    tar -zxf ~/.bin/yay.tar.gz
+    mv ~/.bin/yay_*/yay ~/.bin/yay
+    rm -rf ~/.bin/yay_*
+    rm ~/.bin/yay.tar.gz
+fi
+
 # Install system packages
 sudo steamos-readonly disable
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
-yay -Sy --noconfirm --needed --overwrite '*' \
-    lib32-freetype2 \
-    fakeroot p7zip unrar insync insync-dolphin bat \
+sudo pacman-key --populate holo
+~/.bin/yay -Sy --noconfirm --needed --overwrite '*' \
+    fakeroot insync insync-dolphin \
     xdg-desktop-portal-gtk podman
 
 sudo steamos-readonly enable

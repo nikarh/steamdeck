@@ -18,6 +18,7 @@ shopt -u cdable_vars
 
 export WINE=/home/deck/.var/app/net.lutris.Lutris/data/lutris/runners/wine/lutris-GE-Proton7-11-x86_64/bin/wine
 export WINETRICKS=/home/deck/.var/app/net.lutris.Lutris/data/lutris/runtime/winetricks/winetricks
+alias protontricks='flatpak run com.github.Matoking.protontricks'
 
 if [ -f ~/.bin/starship ]; then 
     eval "$(starship init bash)"
