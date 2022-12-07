@@ -6,6 +6,13 @@ source "$ROOT/functions.sh"
 cp -frsTv "$ROOT/home/" ~
 ln -sf "$ROOT/setup.sh" ~/.bin/
 
+if ! type -P yq > /dev/null && [ ! -f ~/.bin/yq ]; then
+    echo Installing yq
+    latest-release mikefarah/yq "yq_linux_amd64" \
+        ~/.bin/yq
+    chmod +x ~/.bin/yq
+fi
+
 # Download stuff
 file-get https://raw.githubusercontent.com/mrzool/bash-sensible/master/sensible.bash \
     ~/.bash-sensible
@@ -104,6 +111,7 @@ sudo pacman-key --populate archlinux
 sudo pacman-key --populate holo
 ~/.bin/yay -Sy --noconfirm --needed --overwrite '*' \
     fakeroot insync insync-dolphin \
-    xdg-desktop-portal-gtk podman
+    xdg-desktop-portal-gtk podman \
+    wine-staging
 
 sudo steamos-readonly enable
