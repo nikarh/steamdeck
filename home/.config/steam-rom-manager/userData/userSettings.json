@@ -26,6 +26,6 @@
 	"language": "English",
 	"offlineMode": false,
 	"navigationWidth": 250,
-	"clearLogOnTest": false,
+	"clearLogOnTest": true,
 	"version": 3
 }

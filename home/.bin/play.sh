@@ -1,10 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash -ex
+
 cd "$(dirname "$(readlink -f "$0")")" || exit
 
 function expand {
     cat - | sed -r "s:~:/home/$USER:g"
 }
 
+YQ="$HOME/.bin/yq"
 CONFIG_DIR="$HOME/Games/.config"
 RUNTIMES="$HOME/Games/.wine/runtimes"
 LIBRARIES="$HOME/Games/.wine/libraries"
@@ -75,18 +77,18 @@ function create-shell-scripts {
 
     while read line; do
         local game="$(echo $line | awk '{print $2}')"
-        local name="$(cat "$YAML" | yq ".games[\"$game\"].name")"
+        local name="$(cat "$YAML" | $YQ ".games[\"$game\"].name")"
 
         echo -e "#!/bin/bash\n$HOME/.bin/play.sh $game" > "$SHELLS_DIR/$name.sh"
         chmod +x "$SHELLS_DIR/$name.sh"
-    done <<< "$(cat "$YAML" | yq '.games | keys')"
+    done <<< "$(cat "$YAML" | $YQ '.games | keys')"
 }
 
 function run-wine {
     local GAME="$1"
 
-    local RUNTIME=$(cat "$YAML" | yq '.runtime // "default"' | expand)
-    local PREFIXES=$(cat "$YAML" | yq .prefixes | expand)
+    local RUNTIME=$(cat "$YAML" | $YQ '.runtime // "default"' | expand)
+    local PREFIXES=$(cat "$YAML" | $YQ .prefixes | expand)
     local WINE="$RUNTIMES/$RUNTIME"
 
     mkdir -p "$PREFIXES"
@@ -103,14 +105,14 @@ function run-wine {
 
     prepare-winetricks
 
-    eval "$(cat "$YAML" | yq -o p '.env' | sed -r 's/([^ ]+) = (.*)/export \1="\2"/')" > /dev/null
+    eval "$(cat "$YAML" | $YQ -o p '.env' | sed -r 's/([^ ]+) = (.*)/export \1="\2"/')" > /dev/null
 
-    local NAME="$(cat "$YAML" | yq ".games[\"$GAME\"].name")"
-    local PREFIX="$(cat "$YAML" | yq ".games[\"$GAME\"].prefix // \"$NAME\"")"
-    local GAME_DIR="$(cat "$YAML" | yq ".games[\"$GAME\"].dir")"
-    local GAME_EXE="$(cat "$YAML" | yq ".games[\"$GAME\"].run")"
+    local NAME="$(cat "$YAML" | $YQ ".games[\"$GAME\"].name")"
+    local PREFIX="$(cat "$YAML" | $YQ ".games[\"$GAME\"].prefix // \"$NAME\"")"
+    local GAME_DIR="$(cat "$YAML" | $YQ ".games[\"$GAME\"].dir")"
+    local GAME_EXE="$(cat "$YAML" | $YQ ".games[\"$GAME\"].run")"
 
-    eval "$(cat "$YAML" | yq -o p ".games[\"$GAME\"].env" | sed -r 's/([^ ]+) = (.*)/export \1="\2"/')" > /dev/null
+    eval "$(cat "$YAML" | $YQ -o p ".games[\"$GAME\"].env" | sed -r 's/([^ ]+) = (.*)/export \1="\2"/')" > /dev/null
 
     export PATH="$WINE/bin:$RUNTIMES/.bin:$PATH"
     export WINEPREFIX="$PREFIXES/$PREFIX"
@@ -140,7 +142,7 @@ function run-wine {
             winetricks $line
             echo "$line" >> "$WINEPREFIX/.winetricks"
         fi
-    done <<< "$(cat "$YAML" | yq ".games[\"$GAME\"].winetricks // []")"
+    done <<< "$(cat "$YAML" | $YQ ".games[\"$GAME\"].winetricks // []")"
 
     # Mounts
     while read line; do
@@ -149,9 +151,9 @@ function run-wine {
             continue
         fi
 
-        local from="$(cat "$YAML" | yq ".games[\"$GAME\"].mounts[\"$line\"]")"
-        ln -s "$from" "$WINEPREFIX/dosdevices/${line}:"
-    done <<< "$(cat "$YAML" | yq ".games[\"$GAME\"].mounts // {} | keys")"
+        local from="$(cat "$YAML" | $YQ ".games[\"$GAME\"].mounts[\"$line\"]")"
+        ln -sf "$from" "$WINEPREFIX/dosdevices/${line}:"
+    done <<< "$(cat "$YAML" | $YQ ".games[\"$GAME\"].mounts // {} | keys")"
 
     # Install libraries for games
     local syswow="$WINEPREFIX/drive_c/windows/syswow64"
@@ -170,25 +172,25 @@ function run-wine {
     echo "cd \"$GAME_DIR\""
     echo "export PATH=\"$WINE/bin:\$PATH\""
     echo "export WINEPREFIX=\"$PREFIXES/$PREFIX\""
-    echo 'wine '\""$GAME_EXE"\" $(cat "$YAML" | yq ".games[\"$GAME\"].args // \"\"" | sed -r 's/- ([^ ]+)/\1/')
+    echo 'wine '\""$GAME_EXE"\" $(cat "$YAML" | $YQ ".games[\"$GAME\"].args // \"\"" | sed -r 's/- ([^ ]+)/\1/')
 
     cd "$GAME_DIR"
-    wine "$GAME_EXE" "${@:2}" $(cat "$YAML" | yq ".games[\"$GAME\"].args // \"\"" | sed -r 's/- ([^ ]+)/\1/')
+    wine "$GAME_EXE" "${@:2}" $(cat "$YAML" | $YQ ".games[\"$GAME\"].args // \"\"" | sed -r 's/- ([^ ]+)/\1/')
 
     # Some games fork, don't cleanup for them
-    if [[ "$(cat "$YAML" | yq ".games[\"$GAME\"].cleanup")" != "false" ]]; then
+    if [[ "$(cat "$YAML" | $YQ ".games[\"$GAME\"].cleanup")" != "false" ]]; then
         wineserver -k
     fi
 }
 
 function run-native {
     local GAME="$1"
-    local RUN="$(cat "$YAML" | yq ".games[\"$GAME\"].run")"
-    local GAME_DIR="$(cat "$YAML" | yq ".games[\"$GAME\"].dir // \"$HOME\"")"
+    local RUN="$(cat "$YAML" | $YQ ".games[\"$GAME\"].run")"
+    local GAME_DIR="$(cat "$YAML" | $YQ ".games[\"$GAME\"].dir // \"$HOME\"")"
 
     cd "$GAME_DIR"
 
-    "$RUN" $(cat "$YAML" | yq ".games[\"$GAME\"].args // \"\"" | sed -r 's/- ([^ ]+)/\1/')
+    "$RUN" $(cat "$YAML" | $YQ ".games[\"$GAME\"].args // \"\"" | sed -r 's/- ([^ ]+)/\1/')
 }
 
 function run {
@@ -196,17 +198,17 @@ function run {
 
     if [ -z "$GAME" ]; then
         echo Provide game key as an argument:
-        echo "$(cat "$YAML" | yq '.games | keys')"
+        echo "$(cat "$YAML" | $YQ '.games | keys')"
         exit 1;
     fi
 
-    if [[ "$(cat "$YAML" | yq ".games[\"$GAME\"]")" == "null" ]]; then
+    if [[ "$(cat "$YAML" | $YQ ".games[\"$GAME\"]")" == "null" ]]; then
         echo Invalid game "$GAME", provide valid game key as an argument:
-        echo "$(cat "$YAML" | yq '.games | keys')"
+        echo "$(cat "$YAML" | $YQ '.games | keys')"
         exit 1;
     fi
 
-    local TYPE="$(cat "$YAML" | yq ".games[\"$GAME\"].type // \"wine\"")"
+    local TYPE="$(cat "$YAML" | $YQ ".games[\"$GAME\"].type // \"wine\"")"
 
     case "$TYPE" in
         native)
