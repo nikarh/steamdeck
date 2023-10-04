@@ -126,8 +126,7 @@ sudo pacman-key --init
 sudo pacman-key --populate archlinux
 sudo pacman-key --populate holo
 ~/.bin/yay -Sy --noconfirm --needed --overwrite '*' \
-    fakeroot insync insync-dolphin \
-    xdg-desktop-portal-gtk podman \
+    fakeroot xdg-desktop-portal-gtk podman \
     wine-staging
 
 sudo steamos-readonly enable
