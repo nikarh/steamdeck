@@ -1,8 +1,8 @@
 {
 	"fuzzyMatcher": {
 		"timestamps": {
-			"check": 1670428558114,
-			"download": 1670428558114
+			"check": 1704743197760,
+			"download": 1704743197760
 		},
 		"verbose": false,
 		"filterProviders": true
@@ -12,7 +12,8 @@
 		"retroarchPath": "/home/deck/.steam/steam/steamapps/common/RetroArch/retroarch",
 		"raCoresDirectory": "/home/deck/.steam/steam/steamapps/common/RetroArch/cores",
 		"localImagesDirectory": "/home/deck/Games/.images",
-		"romsDirectory": ""
+		"romsDirectory": "",
+		"userAccounts": ""
 	},
 	"previewSettings": {
 		"retrieveCurrentSteamImages": true,
@@ -23,9 +24,11 @@
 	"enabledProviders": [
 		"SteamGridDB"
 	],
-	"language": "English",
+	"language": "en-US",
 	"offlineMode": false,
 	"navigationWidth": 250,
 	"clearLogOnTest": true,
-	"version": 3
+	"version": 6,
+	"theme": "Deck",
+	"batchDownloadSize": 50
 }

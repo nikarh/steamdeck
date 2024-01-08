@@ -1,0 +1,13 @@
+[Unit]
+Description=Watch brie config and generate shortcuts on changes
+After=sockets.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=%h/.bin/briectl watch
+
+[Install]
+WantedBy=default.target

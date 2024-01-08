@@ -3,15 +3,12 @@ ROOT="$(cd "$(dirname "$(readlink -f ${BASH_SOURCE[0]})")" &> /dev/null && pwd)"
 source "$ROOT/functions.sh"
 
 # Link configs
+mkdir -p ~/.bin
+mkdir -p ~/Games
+mkdir -p ~/Programs
+
 cp -frsTv "$ROOT/home/" ~
 ln -sf "$ROOT/setup.sh" ~/.bin/
-
-if ! type -P yq > /dev/null && [ ! -f ~/.bin/yq ]; then
-    echo Installing yq
-    latest-release mikefarah/yq "yq_linux_amd64" \
-        ~/.bin/yq
-    chmod +x ~/.bin/yq
-fi
 
 # Download stuff
 file-get https://raw.githubusercontent.com/mrzool/bash-sensible/master/sensible.bash \
@@ -20,6 +17,13 @@ file-get https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
     ~/.vim/autoload/plug.vim
 git-get https://github.com/junegunn/fzf.git \
     ~/.fzf
+
+# Install brie
+latest-release nikarh/brie "brie-x86_64-unknown-linux-gnu-v.*\.tar\.gz$" /tmp/brie.tar.gz
+tar -zxvf /tmp/brie.tar.gz -C ~/.bin brie
+tar -zxvf /tmp/brie.tar.gz -C ~/.bin briectl
+rm /tmp/brie.tar.gz
+systemctl enable --now --user briectl
 
 # Init vim
 echo "Updating vim plugins"
@@ -40,12 +44,12 @@ try update-to-latest-release \
         kmicki/SteamDeckGyroDSU \
         "$(cat ~/.cache/.SteamDeckGyroDSU.version || echo)" \
         "SteamDeckGyroDSUSetup\.zip$" \
-        ~/Programs/sdgyrodsu.zip
+        /tmp/sdgyrodsu.zip
 
 if [ $EXIT_CODE -eq 0 ]; then
     echo "$LATEST_VERSION" >| ~/.cache/.SteamDeckGyroDSU.version
-    unzip -o ~/Programs/sdgyrodsu.zip -d ~/Programs >/dev/null;
-    rm -f ~/Programs/sdgyrodsu.zip
+    unzip -o /tmp/sdgyrodsu.zip -d ~/Programs >/dev/null;
+    rm -f /tmp/sdgyrodsu.zip
     sed -i 's/ExecStart=.*/ExecStart=%h\/.bin\/sdgyrodsu/g' ~/Programs/SteamDeckGyroDSUSetup/sdgyrodsu.service
     sed -i 's/HOME\/sdgyrodsu/HOME\/.bin/g' ~/Programs/SteamDeckGyroDSUSetup/install.sh
 
@@ -73,19 +77,10 @@ if [ $EXIT_CODE -eq 0 ]; then
     rm /tmp/starship.tar.gz
 fi
 
-# Sunshine for streaming, not in flathub yet
-try update-to-latest-release LizardByte/Sunshine \
-        "$(flatpak run dev.lizardbyte.sunshine --version | grep version | awk '{print $3}')" \
-        "sunshine_x86_64.flatpak$" \
-        /tmp/sunshine.flatpak
-if [ $EXIT_CODE -eq 0 ]; then 
-    flatpak install --user --noninteractive --or-update \
-        /tmp/sunshine.flatpak || true
-    rm /tmp/sunshine.flatpak
-fi
 # Install flatpaks
 flatpak install --noninteractive --or-update flathub \
     `# Apps` \
+    dev.lizardbyte.app.Sunshine \
     com.github.Eloston.UngoogledChromium \
     org.keepassxc.KeePassXC \
     org.qbittorrent.qBittorrent \
@@ -105,7 +100,7 @@ flatpak install --noninteractive --or-update flathub \
 
 flatpak override --user com.github.Eloston.UngoogledChromium --socket=session-bus
 
-# NOPASSWD for all of the bellow commands plus systemctl for teamviewer
+# NOPASSWD for all of the bellow commands plus systemctl
 if ! sudo -n /usr/bin/pacman -V > /dev/null 2>&1; then
     cat "$ROOT/etc/sudoers.d/wheel" | sudo tee /etc/sudoers.d/wheel
 fi
@@ -126,7 +121,6 @@ sudo pacman-key --init
 sudo pacman-key --populate archlinux
 sudo pacman-key --populate holo
 ~/.bin/yay -Sy --noconfirm --needed --overwrite '*' \
-    fakeroot xdg-desktop-portal-gtk podman \
-    wine-staging
+    fakeroot wine-staging
 
-sudo steamos-readonly enable
+# sudo steamos-readonly enable
