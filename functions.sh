@@ -36,7 +36,7 @@ function update-to-latest-release {
     local FILENAME="$3"
     local TARGET="$4"
     local RES="$(curl -s "https://api.github.com/repos/$REPO/releases/latest")"
-    LATEST_VERSION="$(echo "$RES" | jq -r '.name')"
+    LATEST_VERSION="$(echo "$RES" | jq -r '.tag_name')"
 
     if [[ "$LATEST_VERSION" == "$CURRENT" ]]; then
         echo "Skipping $REPO update, latest version is $CURRENT";
@@ -46,7 +46,7 @@ function update-to-latest-release {
     if [ -z "$CURRENT" ]; then
         echo "Installing $REPO $LATEST_VERSION";
     else
-        echo "Updating $REPO from $CURRENT to $LATEST_VERSION";
+        echo "Updating $REPO from \"$CURRENT\" to \"$LATEST_VERSION\"";
     fi
 
     local URL="$(echo "$RES" \

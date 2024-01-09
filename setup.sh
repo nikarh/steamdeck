@@ -18,11 +18,18 @@ file-get https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim \
 git-get https://github.com/junegunn/fzf.git \
     ~/.fzf
 
-# Install brie
-latest-release nikarh/brie "brie-x86_64-unknown-linux-gnu-v.*\.tar\.gz$" /tmp/brie.tar.gz
-tar -zxvf /tmp/brie.tar.gz -C ~/.bin brie
-tar -zxvf /tmp/brie.tar.gz -C ~/.bin briectl
-rm /tmp/brie.tar.gz
+try update-to-latest-release \
+        nikarh/brie \
+        "$(briectl -V | awk '{print "v"$2}' || echo)" \
+        "brie-x86_64-unknown-linux-gnu-v.*\.tar\.gz$" /tmp/brie.tar.gz \
+        /tmp/brie.tar.gz
+
+if [ $EXIT_CODE -eq 0 ]; then
+    tar -zxvf /tmp/brie.tar.gz -C ~/.bin brie
+    tar -zxvf /tmp/brie.tar.gz -C ~/.bin briectl
+    rm /tmp/brie.tar.gz
+fi
+
 systemctl enable --now --user briectl
 
 # Init vim
