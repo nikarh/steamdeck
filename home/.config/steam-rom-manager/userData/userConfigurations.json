@@ -235,13 +235,15 @@
     {
         "parserType": "Glob",
         "configTitle": "Cemu Folder",
-        "steamCategory": "${Wii U}",
         "steamDirectory": "${steamdirglobal}",
+        "steamCategory": "${Wii U}",
         "romDirectory": "/home/deck/roms/wiiu/games",
         "executableArgs": "cemu -f -g \"${filePath}\"",
         "executableModifier": "\"${exePath}\"",
         "startInDirectory": "",
         "titleModifier": "${fuzzyTitle}",
+        "fetchControllerTemplatesButton": null,
+        "removeControllersButton": null,
         "imageProviders": [
             "SteamGridDB"
         ],
@@ -251,7 +253,7 @@
             "specifiedAccounts": ""
         },
         "executable": {
-            "path": "/home/deck/.bin/play.sh",
+            "path": "/home/deck/.bin/brie",
             "shortcutPassthrough": false,
             "appendArgsToExecutable": true
         },
@@ -269,6 +271,16 @@
             "removeCharacters": true,
             "removeBrackets": true
         },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "xbox360": null,
+            "xboxone": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null
+        },
         "imageProviderAPIs": {
             "SteamGridDB": {
                 "nsfw": false,
@@ -282,43 +294,35 @@
                 ]
             }
         },
-        "parserId": "165271857442772476",
-        "version": 15,
-        "controllers": {
-            "ps4": null,
-            "ps5": null,
-            "xbox360": null,
-            "xboxone": null,
-            "switch_joycon_left": null,
-            "switch_joycon_right": null,
-            "switch_pro": null,
-            "neptune": null
-        },
         "defaultImage": {
-            "long": "",
             "tall": "",
+            "long": "",
             "hero": "",
             "logo": "",
             "icon": ""
         },
         "localImages": {
-            "long": "",
             "tall": "",
+            "long": "",
             "hero": "",
             "logo": "",
             "icon": "${dir}/../*${/\\[.*?\\]/g|${title}|}*/meta/iconTex.tga"
-        }
+        },
+        "parserId": "165271857442772476",
+        "version": 15
     },
     {
         "parserType": "Glob",
         "configTitle": "Cemu File",
-        "steamCategory": "${Wii U}",
         "steamDirectory": "${steamdirglobal}",
+        "steamCategory": "${Wii U}",
         "romDirectory": "/home/deck/roms/wiiu/games",
         "executableArgs": "cemu -f -g \"${filePath}\"",
         "executableModifier": "\"${exePath}\"",
         "startInDirectory": "",
         "titleModifier": "${fuzzyTitle}",
+        "fetchControllerTemplatesButton": null,
+        "removeControllersButton": null,
         "imageProviders": [
             "SteamGridDB"
         ],
@@ -328,7 +332,7 @@
             "specifiedAccounts": ""
         },
         "executable": {
-            "path": "/home/deck/.bin/play.sh",
+            "path": "/home/deck/.bin/brie",
             "shortcutPassthrough": false,
             "appendArgsToExecutable": true
         },
@@ -346,6 +350,16 @@
             "removeCharacters": true,
             "removeBrackets": true
         },
+        "controllers": {
+            "ps4": null,
+            "ps5": null,
+            "xbox360": null,
+            "xboxone": null,
+            "switch_joycon_left": null,
+            "switch_joycon_right": null,
+            "switch_pro": null,
+            "neptune": null
+        },
         "imageProviderAPIs": {
             "SteamGridDB": {
                 "nsfw": false,
@@ -359,31 +373,21 @@
                 ]
             }
         },
-        "parserId": "165278867037422604",
-        "version": 15,
-        "controllers": {
-            "ps4": null,
-            "ps5": null,
-            "xbox360": null,
-            "xboxone": null,
-            "switch_joycon_left": null,
-            "switch_joycon_right": null,
-            "switch_pro": null,
-            "neptune": null
-        },
         "defaultImage": {
-            "long": "",
             "tall": "",
+            "long": "",
             "hero": "",
             "logo": "",
             "icon": ""
         },
         "localImages": {
-            "long": "",
             "tall": "",
+            "long": "",
             "hero": "",
             "logo": "",
             "icon": "${dir}/../*${/\\[.*?\\]/g|${title}|}*/meta/iconTex.tga"
-        }
+        },
+        "parserId": "165278867037422604",
+        "version": 15
     }
 ]

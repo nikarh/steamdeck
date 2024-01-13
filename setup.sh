@@ -84,6 +84,17 @@ if [ $EXIT_CODE -eq 0 ]; then
     rm /tmp/starship.tar.gz
 fi
 
+# Rustdesk, not in flathub yet
+try update-to-latest-release rustdesk/rustdesk \
+        "$(flatpak run com.rustdesk.RustDesk --version)" \
+        "rustdesk.*\.flatpak$" \
+        /tmp/rustdesk.flatpak
+if [ $EXIT_CODE -eq 0 ]; then 
+    flatpak install --user --noninteractive --or-update \
+        /tmp/rustdesk.flatpak || true
+    rm /tmp/rustdesk.flatpak
+fi
+
 # Install flatpaks
 flatpak install --noninteractive --or-update flathub \
     `# Apps` \
@@ -107,27 +118,7 @@ flatpak install --noninteractive --or-update flathub \
 
 flatpak override --user com.github.Eloston.UngoogledChromium --socket=session-bus
 
-# NOPASSWD for all of the bellow commands plus systemctl
-if ! sudo -n /usr/bin/pacman -V > /dev/null 2>&1; then
-    cat "$ROOT/etc/sudoers.d/wheel" | sudo tee /etc/sudoers.d/wheel
-fi
-
-# Install yay for insync
-if [ ! -f ~/.bin/yay ]; then
-    latest-release Jguer/yay "yay_.*_x86_64.tar.gz$" \
-        ~/.bin/yay.tar.gz
-    tar -zxf ~/.bin/yay.tar.gz
-    mv ~/.bin/yay_*/yay ~/.bin/yay
-    rm -rf ~/.bin/yay_*
-    rm ~/.bin/yay.tar.gz
-fi
-
-# Install system packages
-sudo steamos-readonly disable
-sudo pacman-key --init
-sudo pacman-key --populate archlinux
-sudo pacman-key --populate holo
-~/.bin/yay -Sy --noconfirm --needed --overwrite '*' \
-    fakeroot wine-staging
-
-# sudo steamos-readonly enable
+# wine-ge-custom also requires lib32-libxrandr.
+# It can either be installed system-wide, or linked
+# from steam with LD_LIBRARY_PATH:
+# LD_LIBRARY_PATH="/home/deck/.local/share/Steam/ubuntu12_32/steam-runtime/usr/lib/i386-linux-gnu/"
