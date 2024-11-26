@@ -5,10 +5,12 @@ source "$ROOT/functions.sh"
 # Link configs
 mkdir -p ~/.bin
 mkdir -p ~/Games
-mkdir -p ~/Programs
+mkdir -p ~/Applications
 
 cp -frsTv "$ROOT/home/" ~
 ln -sf "$ROOT/setup.sh" ~/.bin/
+
+#if [[ 1 -eq 2 ]]; then
 
 # Download stuff
 file-get https://raw.githubusercontent.com/mrzool/bash-sensible/master/sensible.bash \
@@ -36,13 +38,15 @@ systemctl enable --now --user briectl
 echo "Updating vim plugins"
 vim +PlugClean! +PlugUpdate +qa > /dev/null 2>&1
 
+#fi
+
 # Download and enable syncthing
 # It will autoupdate, so install it precisely once
-if [ ! -f ~/Programs/syncthing/syncthing ]; then
+if [ ! -f ~/Applications/syncthing/syncthing ]; then
     latest-release syncthing/syncthing "syncthing-linux-amd64.*tar\.gz$" \
-            ~/Programs/syncthing.tar.gz
-    tar -zxvf ~/Programs/syncthing.tar.gz
-    rm ~/Programs/syncthing.tar.gz
+            ~/Applications/syncthing.tar.gz
+    tar -zxvf ~/Applications/syncthing.tar.gz
+    rm ~/Applications/syncthing.tar.gz
 fi
 systemctl enable --now --user syncthing
 
@@ -55,20 +59,20 @@ try update-to-latest-release \
 
 if [ $EXIT_CODE -eq 0 ]; then
     echo "$LATEST_VERSION" >| ~/.cache/.SteamDeckGyroDSU.version
-    unzip -o /tmp/sdgyrodsu.zip -d ~/Programs >/dev/null;
+    unzip -o /tmp/sdgyrodsu.zip -d ~/Applications >/dev/null;
     rm -f /tmp/sdgyrodsu.zip
-    sed -i 's/ExecStart=.*/ExecStart=%h\/.bin\/sdgyrodsu/g' ~/Programs/SteamDeckGyroDSUSetup/sdgyrodsu.service
-    sed -i 's/HOME\/sdgyrodsu/HOME\/.bin/g' ~/Programs/SteamDeckGyroDSUSetup/install.sh
+    sed -i 's/ExecStart=.*/ExecStart=%h\/.bin\/sdgyrodsu/g' ~/Applications/SteamDeckGyroDSUSetup/sdgyrodsu.service
+    sed -i 's/HOME\/sdgyrodsu/HOME\/.bin/g' ~/Applications/SteamDeckGyroDSUSetup/install.sh
 
     if groups | grep -q usbaccess; then
         mkdir -p ~/.config/systemd/user/
-        mv ~/Programs/SteamDeckGyroDSUSetup/sdgyrodsu.service ~/.config/systemd/user/
-        mv ~/Programs/SteamDeckGyroDSUSetup/sdgyrodsu ~/.bin/
+        mv ~/Applications/SteamDeckGyroDSUSetup/sdgyrodsu.service ~/.config/systemd/user/
+        mv ~/Applications/SteamDeckGyroDSUSetup/sdgyrodsu ~/.bin/
     else
-        (cd ~/Programs/SteamDeckGyroDSUSetup/; ./install.sh)
+        (cd ~/Applications/SteamDeckGyroDSUSetup/; ./install.sh)
     fi
 
-    rm -rf ~/Programs/SteamDeckGyroDSUSetup
+    rm -rf ~/Applications/SteamDeckGyroDSUSetup
     systemctl enable --now --user sdgyrodsu
 fi
 
@@ -84,39 +88,29 @@ if [ $EXIT_CODE -eq 0 ]; then
     rm /tmp/starship.tar.gz
 fi
 
-# Rustdesk, not in flathub yet
-try update-to-latest-release rustdesk/rustdesk \
-        "$(flatpak run com.rustdesk.RustDesk --version)" \
-        "rustdesk.*\.flatpak$" \
-        /tmp/rustdesk.flatpak
-if [ $EXIT_CODE -eq 0 ]; then 
-    flatpak install --user --noninteractive --or-update \
-        /tmp/rustdesk.flatpak || true
-    rm /tmp/rustdesk.flatpak
-fi
-
 # Install flatpaks
-flatpak install --noninteractive --or-update flathub \
+flatpak install  --user --noninteractive --or-update flathub \
     `# Apps` \
     dev.lizardbyte.app.Sunshine \
-    com.github.Eloston.UngoogledChromium \
+    com.rustdesk.RustDesk \
+    org.mozilla.firefox \
+    io.github.ungoogled_software.ungoogled_chromium \
     org.keepassxc.KeePassXC \
     org.qbittorrent.qBittorrent \
-    org.telegram.desktop \
     com.visualstudio.code \
-    com.discordapp.Discord \
     com.github.iwalton3.jellyfin-media-player \
     com.steamgriddb.steam-rom-manager \
     com.heroicgameslauncher.hgl \
     com.github.tchx84.Flatseal \
-    `# Emulators` \
-    app.xemu.xemu \
-    org.DolphinEmu.dolphin-emu \
-    org.citra_emu.citra \
-    org.desmume.DeSmuME \
-    org.yuzu_emu.yuzu
 
-flatpak override --user com.github.Eloston.UngoogledChromium --socket=session-bus
+    # Emulators
+    #app.xemu.xemu \
+    #org.DolphinEmu.dolphin-emu \
+    #org.citra_emu.citra \
+    #org.desmume.DeSmuME \
+    #org.yuzu_emu.yuzu
+
+flatpak override --user io.github.ungoogled_software.ungoogled_chromium --socket=session-bus
 
 # wine-ge-custom also requires lib32-libxrandr.
 # It can either be installed system-wide, or linked

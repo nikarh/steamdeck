@@ -2,7 +2,7 @@
 [Desktop Entry]
 Comment[en_US]=Remote control solution.
 Comment=Remote control solution.
-Exec=flatpak run dev.lizardbyte.sunshine
+Exec=flatpak run dev.lizardbyte.app.Sunshine
 Name=Sunshine
 StartupNotify=true
 Terminal=true

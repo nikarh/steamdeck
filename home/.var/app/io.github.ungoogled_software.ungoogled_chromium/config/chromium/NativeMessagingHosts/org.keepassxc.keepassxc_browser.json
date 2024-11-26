@@ -5,6 +5,6 @@
     ],
     "description": "KeePassXC integration with native messaging support",
     "name": "org.keepassxc.keepassxc_browser",
-    "path": "/home/deck/.var/app/com.github.Eloston.UngoogledChromium/config/chromium/NativeMessagingHosts/org.keepassxc.KeePassXC",
+    "path": "/home/deck/.var/app/io.github.ungoogled_software.ungoogled_chromium/config/chromium/NativeMessagingHosts/org.keepassxc.KeePassXC",
     "type": "stdio"
 }

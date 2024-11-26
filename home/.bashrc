@@ -4,7 +4,6 @@ export PATH=$PATH:~/.fzf/bin/:~/.bin
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-
 trysource() {
     if [ -f "$1" ]; then source "$1"; fi
 }
@@ -22,4 +21,3 @@ shopt -u cdable_vars
 if [ -f ~/.bin/starship ]; then 
     eval "$(starship init bash)"
 fi
-

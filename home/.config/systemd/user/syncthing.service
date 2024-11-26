@@ -7,7 +7,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=%h/Programs/syncthing/syncthing
+ExecStart=%h/Applications/syncthing/syncthing
 
 [Install]
 WantedBy=default.target
